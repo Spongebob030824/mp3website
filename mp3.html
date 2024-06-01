@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP3 Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>MP3 Player</h1>
+        <h1 id="artist-name">(Modern RNB)</h1>
+    </header>
+    <main>
+        <div class="song-card" data-song="1" data-artist="Frank Ocean">
+            <img src="frank.jpg" alt="Artist 1">
+            <div class="song-info">
+                <h2>Thinkin Bout You</h2>
+                <p>Frank Ocean</p>
+            </div>
+            <audio src="Thinkin Bout You.mp3" type="audio/mp3" preload="auto"></audio>
+        </div>
+        <div class="song-card" data-song="2" data-artist="Chris Brown">
+            <img src="chris.jpg" alt="Artist 2">
+            <div class="song-info">
+                <h2>No Guidance</h2>
+                <p>Chris Brown</p>
+            </div>
+            <audio src="No Guidance Chris Brown verse.mp3" type="audio/mp3" preload="auto"></audio>
+        </div>
+        <div class="song-card" data-song="3" data-artist="Usher">
+            <img src="usher.jpg" alt="Artist 3">
+            <div class="song-info">
+                <h2>Burn</h2>
+                <p>Usher</p>
+            </div>
+            <audio src="Burn - Usher (Chorus Only).mp3" type="audio/mp3" preload="auto"></audio>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 MP3 Website</p>
+    </footer>
+    
+    <script>
+        var currentAudio = null;
+
+        document.querySelectorAll('.song-card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                var audio = this.querySelector('audio');
+                var artistName = this.dataset.artist;
+                document.getElementById('artist-name').textContent = artistName;
+
+               
+                document.querySelectorAll('.song-card').forEach(function(card) {
+                    card.classList.remove('clicked');
+                });
+
+                
+                this.classList.add('clicked');
+
+                if (audio !== currentAudio) {
+                    if (currentAudio) {
+                        currentAudio.pause();
+                    }
+                    currentAudio = audio;
+                    audio.play();
+                } else {
+                    if (audio.paused) {
+                        audio.play();
+                    } else {
+                        audio.pause();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
